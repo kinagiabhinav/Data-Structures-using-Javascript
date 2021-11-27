@@ -26,7 +26,7 @@ class LinkedList {
 
     //PUSH - Insert data at the end
     push(data){
-        const node = new Node(data);
+        let node = new Node(data);
 
         //check if list is empty
         if(!this.head){
@@ -37,11 +37,13 @@ class LinkedList {
             this.tail = node;
         }
         this.length++;
+
+        return this;
     }
 
     //UNSHIFT - Insert data at the beginning
     unshift(data){
-        const node = new Node(data);
+        let node = new Node(data);
         
         //check if list is empty
         if(!this.head){
@@ -52,6 +54,50 @@ class LinkedList {
             this.head = node;
         }
         this.length++;
+
+        return this;
+    }
+
+    //SHIFT - Remove data from beginning
+    shift(){
+        //check if list is empty
+        if(!this.head) return 'List is empty!';
+
+        let node = this.head;
+        if(this.length === 1){
+            this.head = null;
+            this.tail = null;
+        } else {
+            this.head = this.head.next;
+            node.next = null;
+        }
+        this.length--;
+
+        return node.data;
+    }
+
+    //POP - Remove data from end
+    pop(){
+        //check if list is empty
+        if(!this.head) return 'List is empty!';
+
+        let node = this.head;
+        if(this.length === 1){
+            this.head = null;
+            this.tail = null;
+        }
+
+        let pre = null;
+        while(node.next){
+            pre = node;
+            node = node.next;
+        }
+        pre.next = null;
+        this.tail = pre;
+
+        this.length--;
+
+        return node.data;
     }
 }
 
