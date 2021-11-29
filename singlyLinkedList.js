@@ -85,16 +85,15 @@ class LinkedList {
         if(this.length === 1){
             this.head = null;
             this.tail = null;
+        } else {
+            let pre = null;
+            while(node.next){
+                pre = node;
+                node = node.next;
+            }
+            pre.next = null;
+            this.tail = pre;
         }
-
-        let pre = null;
-        while(node.next){
-            pre = node;
-            node = node.next;
-        }
-        pre.next = null;
-        this.tail = pre;
-
         this.length--;
 
         return node.data;
