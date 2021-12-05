@@ -9,24 +9,24 @@ class Node{
 
 class Stack{
     constructor(){
-        this.front = null;
-        this.rear = null;
-        this.length = 0;
+        this.top = null;
+        this.bottom = null;
+        this.size = 0;
     }
 
-    //PUSH
+    //PUSH (unshift in linked list)
     push(data){
         let node = new Node(data);
 
         //check if stack is empty
-        if(!this.front){
-            this.front = node;
-            this.rear = node;
+        if(!this.top){
+            this.top = node;
+            this.bottom = node;
         } else {
-            this.rear.next = node;
-            this.rear = node;
+            node.next = this.top;
+            this.top = node;
         }
-        this.length++;
+        this.size++;
 
         return this;
     }
@@ -34,19 +34,19 @@ class Stack{
     //pop in stack(shift in linked list)
     pop(){
         //check if stack is empty
-        if(!this.front){
+        if(!this.top){
             return 'List is empty';
         }
 
-        let data = this.front;
-        if(this.length === 1){
-            this.front = null;
-            this.rear = null;
+        let data = this.top;
+        if(this.size === 1){
+            this.top = null;
+            this.bottom = null;
         } else {
-            this.front = data.next;
+            this.top = data.next;
             data.next = null;
         }
-        this.length--;
+        this.size--;
 
         return data;
     }
@@ -55,4 +55,7 @@ class Stack{
 let s = new Stack();
 s.push(1);
 s.push(2);
+s.push(3);
+console.log(s);
 s.pop();
+console.log(s);
