@@ -67,6 +67,31 @@ class Graph{
         //Delete vertex
         delete this.adjacencyList[vertex];
     }
+
+    //Graph DFS traversal
+    DFSTraversal(start){
+        let visited = {};
+        let result = [];
+        let stack = [start];
+        visited[start] = true;
+        
+        let current = null;
+        //while stack is not empty
+        //pop the element and push to result array
+        while(stack.length){
+            current = stack.pop();
+            result.push(current);
+
+            //Traverse next neighbour and add to stack
+            this.adjacencyList[current].forEach(element => {
+                if(!(visited[element])){
+                    visited[element] = true;
+                    stack.push(element);
+                }
+            });
+        }
+        return result;
+    }
 }
 
 let g = new Graph();
@@ -83,3 +108,4 @@ g.addEdge(1,4);
 g.addEdge(4,3);
 g.addEdge(1,3);
 console.log(g.adjacencyList);
+console.log(g.DFSTraversal(0));
