@@ -92,6 +92,31 @@ class Graph{
         }
         return result;
     }
+
+    //Graph BFS traversal
+    BFSTraversal(start){
+        let visited = {};
+        let result = [];
+        let queue = [start];
+        visited[start] = true;
+        
+        let current = null;
+        //while queue is not empty
+        //pop the element and push to result array
+        while(queue.length){
+            current = queue.shift();
+            result.push(current);
+
+            //Traverse next neighbour and add to queue
+            this.adjacencyList[current].forEach(element => {
+                if(!(visited[element])){
+                    visited[element] = true;
+                    queue.push(element);
+                }
+            });
+        }
+        return result;
+    }
 }
 
 let g = new Graph();
@@ -109,3 +134,4 @@ g.addEdge(4,3);
 g.addEdge(1,3);
 console.log(g.adjacencyList);
 console.log(g.DFSTraversal(0));
+console.log(g.BFSTraversal(0));
